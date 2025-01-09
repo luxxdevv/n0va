@@ -28,12 +28,12 @@ const GithubIcon = () => (
 
 const TwitterIcon = () => (
   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    <path d="M12 7c1.49 0 2.75 1.002 2.75 2.25H10.5c-.276 0-.5.224-.5.5s.224.5.5.5h4c.276 0 .5.224.5.5 0 1.248-1.26 2.25-2.75 2.25s-2.75-1.002-2.75-2.25h4.25c.276 0 .5-.224.5-.5s-.224-.5-.5-.5h-4c-.276 0-.5-.224-.5-.5C9.25 8.252 10.514 7 12 7zm0 10.5a1 1 0 100-2 1 1 0 000 2z"/>
   </svg>
 )
 
 export default function BioPage({ params }: { params: { username: string } }) {
-  const [viewCount, setViewCount] = useState(49)
+  const [viewCount, setViewCount] = useState(99)
   const [showImageActions, setShowImageActions] = useState(false)
 
   useEffect(() => {
@@ -48,9 +48,9 @@ export default function BioPage({ params }: { params: { username: string } }) {
   ]
 
   const socials = [
-    { icon: DiscordIcon, href: "https://discord.gg/your-server", label: "Discord Server" },
-    { icon: GithubIcon, href: "https://github.com/username", label: "GitHub Profile" },
-    { icon: TwitterIcon, href: "https://twitter.com/username", label: "Twitter Profile" },
+    { icon: DiscordIcon, href: "https://dsc.gg/n0vabios", label: "Discord Server" },
+    { icon: GithubIcon, href: "https://github.com/mintybich", label: "GitHub Profile" },
+    { icon: TwitterIcon, href: "https://cash.app/@El1Albino", label: "Cashapp Profile" },
     { icon: Globe, href: "https://crashedout.lol", label: "Portfolio" }
   ]
 
@@ -66,14 +66,14 @@ export default function BioPage({ params }: { params: { username: string } }) {
       <div 
         className="min-h-screen bg-black text-white flex items-center justify-center p-4 relative"
         style={{
-          backgroundImage: 'url("/placeholder.svg")', // Replace with your background image/video
+          backgroundImage: 'url("/placeholder.mp4")', // Replace with your background image/video
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
         
-        <AudioControl audioUrl="/background-music.mp3" /> {/* Replace with your audio file */}
+        <AudioControl audioUrl="/1.mp3" /> {/* Replace with your audio file */}
 
         <div className="w-full max-w-md relative z-10">
           <motion.div
@@ -101,7 +101,7 @@ export default function BioPage({ params }: { params: { username: string } }) {
                 <div className="absolute -inset-0.5 bg-purple-500/30 rounded-full blur-lg animate-pulse"></div>
                 <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-zinc-700">
                   <Image
-                    src="/placeholder.svg"
+                    src="/image.png"
                     alt="Profile"
                     fill
                     className="object-cover"
@@ -109,20 +109,6 @@ export default function BioPage({ params }: { params: { username: string } }) {
                   {showImageActions && (
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center gap-2">
                       {imageActions.map((action, index) => (
-                        <Tooltip key={index}>
-                          <TooltipTrigger asChild>
-                            <button className="w-8 h-8 rounded-lg flex items-center justify-center
-                                           bg-zinc-800/50 border border-zinc-700
-                                           hover:bg-purple-500/20 transition-all duration-300
-                                           hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] hover:border-white
-                                           group">
-                              <action.icon className="w-4 h-4 text-zinc-400 group-hover:text-white" />
-                            </button>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{action.label}</p>
-                          </TooltipContent>
-                        </Tooltip>
                       ))}
                     </div>
                   )}
@@ -218,7 +204,7 @@ export default function BioPage({ params }: { params: { username: string } }) {
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold">tkzf</span>
+                    <span className="font-semibold">luxxified</span>
                     <div className="flex gap-1">
                       <Tooltip>
                         <TooltipTrigger>
