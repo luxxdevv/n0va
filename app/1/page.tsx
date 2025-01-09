@@ -66,14 +66,14 @@ export default function BioPage({ params }: { params: { username: string } }) {
       <div 
         className="min-h-screen bg-black text-white flex items-center justify-center p-4 relative"
         style={{
-          backgroundImage: 'url("/placeholder.mp4")', // Replace with your background image/video
+          backgroundImage: 'url("https://n0va.one/placeholder.mp4")', // Replace with your background image/video
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
         
-        <AudioControl audioUrl="/1.mp3" /> {/* Replace with your audio file */}
+        <AudioControl audioUrl="https://n0va.one/1.mp3" /> {/* Replace with your audio file */}
 
         <div className="w-full max-w-md relative z-10">
           <motion.div
