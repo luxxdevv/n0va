@@ -66,10 +66,41 @@ const specificMetadata = {
   publisher: 'luxxified.',
 }
 
+const foreverhiro = {
+  title: 'n0va.one - User | Hiro.',
+  description: 'Hiro, Student Athlete, Class of 29',
+  openGraph: {
+    title: 'n0va.one - User | Hiro.',
+    description: 'Hiro, Student Athlete, Class of 29',
+    url: 'https://n0va.one/foreverhiro',
+    siteName: 'n0va.one',
+    images: [
+      {
+        url: 'https://n0va.one/profile-picture.jpg',
+        width: 1000,
+        height: 1000,
+        alt: 'PFP',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'n0va.one - User | Hiro.',
+    description: 'Hiro, Student Athlete, Class of 29',
+    creator: '@luxxified',
+    images: ['https://n0va.one/profile-picture.jpg'],
+  },
+  authors: [{ name: 'luxxified.' }],
+  creator: 'luxxified.',
+  publisher: 'luxxified.',
+}
 export default function MetadataProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname()
 
   const metadata = pathname === '/1' ? specificMetadata : defaultMetadata
+  const metadata = pathname === '/foreverhiro' ? foreverhiro : defaultMetadata
 
   return (
     <>
