@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Volume2, VolumeX } from 'lucide-react'
 import { Slider } from "@/components/ui/slider"
 import {
@@ -11,29 +11,40 @@ import {
 } from "@/components/ui/tooltip"
 
 interface AudioControlProps {
-  audioUrl: string
+  audioRef: React.RefObject<HTMLAudioElement>
 }
 
-export function AudioControl({ audioUrl }: AudioControlProps) {
+export function AudioControl({ audioRef }: AudioControlProps) {
   const [volume, setVolume] = useState(50)
   const [isMuted, setIsMuted] = useState(false)
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-
-  useEffect(() => {
-    if (audioUrl) {
-      audioRef.current = new Audio(audioUrl)
-      audioRef.current.loop = true
-    }
-  }, [audioUrl])
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = isMuted ? 0 : volume / 100
     }
-  }, [volume, isMuted])
+  }, [volume, isMuted, audioRef])
 
   const toggleMute = () => {
-    setIsMuted(!isMuted)
+    if (audioRef.current) {
+      if (!isMuted) {
+        audioRef.current.pause()
+      } else {
+        audioRef.current.play().catch(console.error)
+      }
+      setIsMuted(!isMuted)
+    }
+  }
+
+  const handleVolumeChange = (newVolume: number[]) => {
+    const volumeValue = newVolume[0]
+    setVolume(volumeValue)
+    if (audioRef.current) {
+      audioRef.current.volume = volumeValue / 100
+      if (volumeValue > 0 && isMuted) {
+        setIsMuted(false)
+        audioRef.current.play().catch(console.error)
+      }
+    }
   }
 
   return (
@@ -62,7 +73,7 @@ export function AudioControl({ audioUrl }: AudioControlProps) {
       </TooltipProvider>
       <Slider
         value={[volume]}
-        onValueChange={(value) => setVolume(value[0])}
+        onValueChange={handleVolumeChange}
         max={100}
         step={1}
         className="w-24"
@@ -70,6 +81,4 @@ export function AudioControl({ audioUrl }: AudioControlProps) {
     </div>
   )
 }
-
-const audioUrl = "/placeholder.mp3"
 

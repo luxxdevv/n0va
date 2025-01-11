@@ -25,20 +25,25 @@ export function AudioControl({ audioRef }: AudioControlProps) {
   }, [volume, isMuted, audioRef])
 
   const toggleMute = () => {
-    setIsMuted(!isMuted)
     if (audioRef.current) {
       if (!isMuted) {
         audioRef.current.pause()
       } else {
-        audioRef.current.play()
+        audioRef.current.play().catch(console.error)
       }
+      setIsMuted(!isMuted)
     }
   }
 
   const handleVolumeChange = (newVolume: number[]) => {
-    setVolume(newVolume[0])
+    const volumeValue = newVolume[0]
+    setVolume(volumeValue)
     if (audioRef.current) {
-      audioRef.current.volume = newVolume[0] / 100
+      audioRef.current.volume = volumeValue / 100
+      if (volumeValue > 0 && isMuted) {
+        setIsMuted(false)
+        audioRef.current.play().catch(console.error)
+      }
     }
   }
 

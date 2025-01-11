@@ -42,12 +42,72 @@ interface BioPageProps {
 export default function BioPage({ config = {} }: BioPageProps) {
   const [viewCount, setViewCount] = useState(49)
   const [isEntered, setIsEntered] = useState(false)
-  const audioRef = useRef<HTMLAudioElement>(null)
+  const [isAudioReady, setIsAudioReady] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   // Merge provided config with default config
   const finalConfig = {
     ...defaultProfile,
     ...config
+  }
+
+  // Initialize audio
+  useEffect(() => {
+    const audio = new Audio(finalConfig.backgroundMusic)
+    audio.loop = true
+    audio.preload = 'auto'
+    audio.volume = 0.5
+
+    audio.addEventListener('canplaythrough', () => {
+      setIsAudioReady(true)
+    })
+
+    audio.addEventListener('error', (e) => {
+      console.error('Audio loading error:', e)
+    })
+
+    audioRef.current = audio
+
+    return () => {
+      audio.pause()
+      audio.src = ''
+    }
+  }, [finalConfig.backgroundMusic])
+
+  const handleEnter = async () => {
+    try {
+      if (audioRef.current) {
+        // Create a new promise for playing audio
+        const playPromise = audioRef.current.play()
+        
+        if (playPromise !== undefined) {
+          await playPromise
+          console.log('Audio started playing successfully')
+        }
+      }
+    } catch (error) {
+      console.error('Error playing audio:', error)
+    }
+    setIsEntered(true)
+  }
+
+  // Entry screen
+  if (!isEntered) {
+    return (
+      <div 
+        className="min-h-screen bg-black flex items-center justify-center cursor-pointer"
+        onClick={handleEnter}
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-white text-2xl font-bold hover:text-purple-400 transition-colors"
+        >
+          You Should Click :3
+        </motion.div>
+      </div>
+    )
   }
 
   const usernameAnimation = {
@@ -69,54 +129,6 @@ export default function BioPage({ config = {} }: BioPageProps) {
     }
   }
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.5
-    }
-  }, [])
-
-  useEffect(() => {
-    const loadAudio = async () => {
-      if (audioRef.current) {
-        try {
-          audioRef.current.src = finalConfig.backgroundMusic;
-          await audioRef.current.load();
-        } catch (error) {
-          console.error("Failed to load audio:", error);
-        }
-      }
-    };
-    loadAudio();
-  }, [finalConfig.backgroundMusic]);
-
-  const handleEnter = () => {
-    setIsEntered(true);
-    if (audioRef.current) {
-      if (audioRef.current.readyState >= 2) {
-        audioRef.current.currentTime = 0;
-        audioRef.current.play().catch(error => console.error("Audio playback failed:", error));
-      } else {
-        console.error("Audio is not ready to play");
-      }
-    }
-  };
-
-  if (!isEntered) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center cursor-pointer"
-           onClick={handleEnter}>
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-white text-2xl font-bold hover:text-purple-400 transition-colors"
-        >
-          You Should Click :3
-        </motion.div>
-        <audio ref={audioRef} src={finalConfig.backgroundMusic} loop onError={(e) => console.error("Audio error:", e)} />
-      </div>
-    )
-  }
 
   return (
     <TooltipProvider>
