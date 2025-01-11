@@ -76,18 +76,30 @@ export default function BioPage({ config = {} }: BioPageProps) {
   }, [])
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.load();
-    }
+    const loadAudio = async () => {
+      if (audioRef.current) {
+        try {
+          audioRef.current.src = finalConfig.backgroundMusic;
+          await audioRef.current.load();
+        } catch (error) {
+          console.error("Failed to load audio:", error);
+        }
+      }
+    };
+    loadAudio();
   }, [finalConfig.backgroundMusic]);
 
   const handleEnter = () => {
-    setIsEntered(true)
+    setIsEntered(true);
     if (audioRef.current) {
-      audioRef.current.currentTime = 0; // Reset audio to start
-      audioRef.current.play().catch(error => console.error("Audio playback failed:", error));
+      if (audioRef.current.readyState >= 2) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch(error => console.error("Audio playback failed:", error));
+      } else {
+        console.error("Audio is not ready to play");
+      }
     }
-  }
+  };
 
   if (!isEntered) {
     return (
@@ -101,7 +113,7 @@ export default function BioPage({ config = {} }: BioPageProps) {
         >
           You Should Click :3
         </motion.div>
-        <audio ref={audioRef} src={finalConfig.backgroundMusic} loop />
+        <audio ref={audioRef} src={finalConfig.backgroundMusic} loop onError={(e) => console.error("Audio error:", e)} />
       </div>
     )
   }
