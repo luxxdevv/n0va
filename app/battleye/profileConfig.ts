@@ -24,27 +24,25 @@ export interface ProfileConfig {
 }
 
 export const defaultProfile: ProfileConfig = {
-  username: "Hiro",
-  uid: "2",
-  description: "Student Athlete, Class of 29, Gamer.",
-  description1: "taken by luxx 🫶, U14 Brampton SC",
-  profilePicture: "./profile-picture.jpg",
-  backgroundVideo: "./0103.mp4",
-  backgroundMusic: "./background-music1.mp3",
+  username: "Battleye",
+  uid: "3",
+  description: "Owner @ Omni Services.",
+  description1: "",
+  profilePicture: "./profile-picture1.png",
+  backgroundVideo: "./background.mp4",
+  backgroundMusic: "./background-music.mp3",
   badges: [
-    { icon: Crown, label: "Mine <3" },
-    { icon: Video, label: "Content Creator" },
     { icon: Calendar, label: "2025" },
     { icon: BanknoteIcon, label: "Thankful" }
   ],
   socials: [
-    { icon: SnapchatIcon, href: "https://github.com/add/plsdtb", label: "Snapchat Profile" },
-    { icon: TikTokIcon, href: "https://tiktok.com/@srsolarr", label: "TikTok profile" },
-    { icon: YoutubeIcon, href: "https://youtube.com/@foreverhiro", label: "YouTube Channel" },
-    { icon: RobloxIcon, href: "https://roblox.com/users/734931142", label: "Roblox Profile" },
-    { icon: DiscordIcon, href: "https://discord.com/users/824025014818045983", label: "DiscordUser Profile" },
-    { icon: InstagramIcon, href: "https://instagram.com/solarstoledchristmas", label: "Instagram" },
-    { icon: XTwitIcon, href: "https://x.com/Vasityyy4n", label: "Twiter (X)" }
+    { icon: DiscordIcon, href: "https://discord.com/users/1322389041030762538", label: "DiscordUser" },
+    { icon: DiscordIcon, href: "https://discord.com/users/1322389041030762538", label: "DiscordUser" },
+    { icon: DiscordIcon, href: "https://discord.com/users/1322389041030762538", label: "DiscordUser" },
+    { icon: DiscordIcon, href: "https://discord.com/users/1322389041030762538", label: "DiscordUser" },
+    { icon: DiscordIcon, href: "https://discord.com/users/1322389041030762538", label: "DiscordUser" },
+    { icon: DiscordIcon, href: "https://discord.com/users/1322389041030762538", label: "DiscordUser" },
+    { icon: DiscordIcon, href: "https://discord.com/users/1322389041030762538", label: "DiscordUser" }
   ],
   imageActions: []
 }
