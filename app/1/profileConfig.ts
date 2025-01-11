@@ -27,9 +27,9 @@ export const defaultProfile: ProfileConfig = {
   username: "Luxx",
   uid: "8675309",
   description: "developing something cool...",
-  profilePicture: "/bio/profile-picture.png",
-  backgroundVideo: "/bio/background.mp4",
-  backgroundMusic: "/bio/background-music.mp3",
+  profilePicture: "profile-picture.png",
+  backgroundVideo: "background.mp4",
+  backgroundMusic: "background-music.mp3",
   badges: [
     { icon: User, label: "Owner" },
     { icon: Crown, label: "Premium" },
@@ -44,11 +44,6 @@ export const defaultProfile: ProfileConfig = {
     { icon: YoutubeIcon, href: "https://youtube.com/@M-GFN", label: "YouTube Channel" },
     { icon: SoundCloudIcon, href: "https://soundcloud.com/c1nxlmao", label: "SoundCloud" }
   ],
-  imageActions: [
-    { icon: Star, label: "Copy Profile Picture URL" },
-    { icon: Crown, label: "Premium Avatar Frame" },
-    { icon: Sparkles, label: "Add Effects" },
-    { icon: Trophy, label: "View Original" }
-  ]
+  imageActions: []
 }
 

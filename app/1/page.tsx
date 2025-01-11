@@ -12,7 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { ProfileConfig } from "./profileConfig"
+import { ProfileConfig, defaultProfile } from "./profileConfig"
 
 const TypewriterText = ({ text }: { text: string }) => {
   const [displayText, setDisplayText] = useState('')
@@ -36,14 +36,19 @@ const TypewriterText = ({ text }: { text: string }) => {
 }
 
 interface BioPageProps {
-  config: ProfileConfig
+  config?: Partial<ProfileConfig>
 }
 
-export default function BioPage({ config }: BioPageProps) {
+export default function BioPage({ config = {} }: BioPageProps) {
   const [viewCount, setViewCount] = useState(49)
-  const [showImageActions, setShowImageActions] = useState(false)
   const [isEntered, setIsEntered] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
+
+  // Merge provided config with default config
+  const finalConfig = {
+    ...defaultProfile,
+    ...config
+  }
 
   const usernameAnimation = {
     animate: {
@@ -66,9 +71,9 @@ export default function BioPage({ config }: BioPageProps) {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.5; // Set initial volume to 50%
+      audioRef.current.volume = 0.5
     }
-  }, []);
+  }, [])
 
   if (!isEntered) {
     return (
@@ -96,12 +101,12 @@ export default function BioPage({ config }: BioPageProps) {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={config.backgroundVideo} type="video/mp4" />
+          <source src={finalConfig.backgroundVideo} type="video/mp4" />
         </video>
         
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
         
-        <audio ref={audioRef} src={config.backgroundMusic} loop />
+        <audio ref={audioRef} src={finalConfig.backgroundMusic} loop />
         <AudioControl audioRef={audioRef} />
 
         <AnimatePresence>
@@ -125,38 +130,16 @@ export default function BioPage({ config }: BioPageProps) {
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="relative group"
-                  onMouseEnter={() => setShowImageActions(true)}
-                  onMouseLeave={() => setShowImageActions(false)}
                 >
                   <div className="absolute -inset-0.5 bg-purple-500/30 rounded-full blur-lg animate-pulse"></div>
                   <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-zinc-700">
                     <Image
-                      src={config.profilePicture}
+                      src={finalConfig.profilePicture}
                       alt="Profile"
                       width={128}
                       height={128}
                       className="object-cover"
                     />
-                    {showImageActions && (
-                      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center gap-2">
-                        {config.imageActions.map((action, index) => (
-                          <Tooltip key={index} delayDuration={0}>
-                            <TooltipTrigger asChild>
-                              <button className="w-8 h-8 rounded-lg flex items-center justify-center
-                                             bg-zinc-800/50 border border-zinc-700
-                                             hover:bg-purple-500/20 transition-all duration-300
-                                             hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] hover:border-white
-                                             group">
-                                <action.icon className="w-4 h-4 text-zinc-400 group-hover:text-white" />
-                              </button>
-                            </TooltipTrigger>
-                            <TooltipContent className="bg-zinc-800/50 border border-zinc-700">
-                              <p>{action.label}</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </motion.div>
               </div>
@@ -168,7 +151,7 @@ export default function BioPage({ config }: BioPageProps) {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="flex flex-wrap justify-center gap-4 mb-6"
               >
-                {config.badges.map((badge, index) => (
+                {finalConfig.badges.map((badge, index) => (
                   <Tooltip key={index} delayDuration={0}>
                     <TooltipTrigger>
                       <div 
@@ -202,15 +185,15 @@ export default function BioPage({ config }: BioPageProps) {
                       variants={usernameAnimation}
                       animate="animate"
                     >
-                      {config.username}
+                      {finalConfig.username}
                     </motion.h1>
                   </TooltipTrigger>
                   <TooltipContent className="bg-zinc-800/50 border border-zinc-700">
-                    <p>UID: {config.uid}</p>
+                    <p>UID: {finalConfig.uid}</p>
                   </TooltipContent>
                 </Tooltip>
                 <div className="mt-2 text-sm">
-                  <TypewriterText text={config.description} />
+                  <TypewriterText text={finalConfig.description} />
                 </div>
               </motion.div>
 
@@ -221,7 +204,7 @@ export default function BioPage({ config }: BioPageProps) {
                 transition={{ duration: 0.5, delay: 0.8 }}
                 className="bg-zinc-800/50 rounded-xl p-4 flex justify-center gap-4"
               >
-                {config.socials.map((social, index) => (
+                {finalConfig.socials.map((social, index) => (
                   <Tooltip key={index} delayDuration={0}>
                     <TooltipTrigger asChild>
                       <Link 
