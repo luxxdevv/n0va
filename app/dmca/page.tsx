@@ -2,7 +2,7 @@ import { Navbar } from "@/components/navbar"
 
 export default function DMCA() {
   return (
-    <div className="min-h-screen bg-zinc-900">
+    <div className="min-h-screen bg-zinc-100">
       <Navbar />
       <div className="container mx-auto px-4 pt-32 pb-16">
         <div className="prose prose-invert max-w-4xl mx-auto">
