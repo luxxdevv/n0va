@@ -23,16 +23,16 @@ export const SoundCloudIcon = () => (
 )
 
 export const DiscordIcon = () => (
-  <svg className="w-5 h-5" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+  <svg className="w-5 h-5" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#A1A1AA">
     <path
       d="M17.59,34.1733c-.89,1.3069-1.8944,2.6152-2.91,3.8267C7.3,37.79,4.5,33,4.5,33A44.83,44.83,0,0,1,9.31,13.48,16.47,16.47,0,0,1,18.69,10l1,2.31A32.6875,32.6875,0,0,1,24,12a32.9643,32.9643,0,0,1,4.33.3l1-2.31a16.47,16.47,0,0,1,9.38,3.51A44.8292,44.8292,0,0,1,43.5,33s-2.8,4.79-10.18,5a47.4193,47.4193,0,0,1-2.86-3.81m6.46-2.9c-3.84,1.9454-7.5555,3.89-12.92,3.89s-9.08-1.9446-12.92-3.89"
       fill="none"
-      stroke="#000000"
+      stroke="#A1A1AA"
       strokeLinecap="round"
       strokeLinejoin="round"
     ></path>
-    <circle cx="17.847" cy="26.23" r="3.35" stroke="#000000" strokeLinecap="round" strokeLinejoin="round"></circle>
-    <circle cx="30.153" cy="26.23" r="3.35" stroke="#000000" strokeLinecap="round" strokeLinejoin="round"></circle>
+    <circle cx="17.847" cy="26.23" r="3.35" stroke="#A1A1AA" strokeLinecap="round" strokeLinejoin="round"></circle>
+    <circle cx="30.153" cy="26.23" r="3.35" stroke="#A1A1AA" strokeLinecap="round" strokeLinejoin="round"></circle>
   </svg>
 )
 
@@ -64,12 +64,12 @@ export const TikTokIcon = () => (
 )
 
 export const SnapchatIcon = () => (
-  <svg className="w-5 h-5" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+  <svg className="w-5 h-5" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#A1A1AA">
     <g>
       <path
         d="m24.0116,42.2697c3.8272-.0024,4.9669-1.6066,7.486-2.7237,2.2497-.9976,5.4694.5087,6.1373-2.1616h0c.0865-1.3801,2.513-1.1579,3.8742-2.0996,1.2418-.8591,1.3659-2.2361.0902-2.778-2.8877-1.2269-5.9232-3.9144-6.6578-6.7964-.4582-1.7978,5.2788-2.3506,4.0841-5.7402-.7049-2.0001-3.2379-1.2958-4.616-.8478.9182-7.1086-2.542-13.3923-10.4098-13.3923s-11.328,6.2837-10.4098,13.3923c-1.378-.448-3.911-1.1523-4.616.8478-1.1947,3.3896,4.5424,3.9424,4.0841,5.7402-.7346,2.882-3.77,5.5695-6.6578,6.7964-1.2757.542-1.1516,1.9189.0902,2.778,1.3612.9417,3.7878.7195,3.8742,2.0996h0c.6679,2.6703,3.8876,1.164,6.1373,2.1616,2.5191,1.1171,3.6588,2.7213,7.486,2.7237.0058,0,.0173,0,.0231,0Z"
         fill="none"
-        stroke="#000000"
+        stroke="#A1A1AA"
         strokeLinecap="round"
         strokeLinejoin="round"
       ></path>
