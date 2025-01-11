@@ -125,7 +125,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute -inset-1 bg-purple-500/30 rounded-lg blur-xl"></div>
               <Image
-                src="/placeholder.svg"
+                src="/placeholder.png"
                 alt="Preview"
                 width={600}
                 height={400}
