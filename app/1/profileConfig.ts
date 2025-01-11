@@ -39,10 +39,10 @@ export const defaultProfile: ProfileConfig = {
     { icon: BanknoteIcon, label: "Thankful" }
   ],
   socials: [
-    { icon: GithubIcon, href: "https://github.com/username", label: "GitHub Profile" },
-    { icon: CashAppIcon, href: "https://cash.app/$username", label: "Send Money" },
-    { icon: YoutubeIcon, href: "https://youtube.com/@username", label: "YouTube Channel" },
-    { icon: SoundCloudIcon, href: "https://soundcloud.com/username", label: "SoundCloud" }
+    { icon: GithubIcon, href: "https://github.com/mintybich", label: "GitHub Profile" },
+    { icon: CashAppIcon, href: "https://cash.app/$El1Albino", label: "Send Money" },
+    { icon: YoutubeIcon, href: "https://youtube.com/@M-GFN", label: "YouTube Channel" },
+    { icon: SoundCloudIcon, href: "https://soundcloud.com/c1nxlmao", label: "SoundCloud" }
   ],
   imageActions: [
     { icon: Star, label: "Copy Profile Picture URL" },
