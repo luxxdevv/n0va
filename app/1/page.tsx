@@ -75,10 +75,17 @@ export default function BioPage({ config = {} }: BioPageProps) {
     }
   }, [])
 
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.load();
+    }
+  }, [finalConfig.backgroundMusic]);
+
   const handleEnter = () => {
     setIsEntered(true)
     if (audioRef.current) {
-      audioRef.current.play().catch(error => console.error("Audio playback failed:", error))
+      audioRef.current.currentTime = 0; // Reset audio to start
+      audioRef.current.play().catch(error => console.error("Audio playback failed:", error));
     }
   }
 
