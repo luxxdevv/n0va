@@ -24,7 +24,7 @@ export interface ProfileConfig {
 }
 
 export const defaultProfile: ProfileConfig = {
-  username: "Luxx",
+  username: "Hiro",
   uid: "2",
   description: "Student Athlete, Class of 29, Gamer.",
   description1: "taken by luxx 🫶, U14 Brampton SC",
@@ -41,9 +41,9 @@ export const defaultProfile: ProfileConfig = {
     { icon: SnapchatIcon, href: "https://github.com/add/plsdtb", label: "Snapchat Profile" },
     { icon: TikTokIcon, href: "https://tiktok.com/@srsolarr", label: "TikTok profile" },
     { icon: YoutubeIcon, href: "https://youtube.com/@foreverhiro", label: "YouTube Channel" },
-    { icon: RobloxIcon, href: "https://roblox.com/users/734931142", label: "Roblox Profile" }
-    { icon: DiscordIcon, href: "https://discord.com/users/824025014818045983", label: "DiscordUser Profile" }
-    { icon: InstagramIcon, href: "https://instagram.com/solarstoledchristmas", label: "Instagram" }
+    { icon: RobloxIcon, href: "https://roblox.com/users/734931142", label: "Roblox Profile" },
+    { icon: DiscordIcon, href: "https://discord.com/users/824025014818045983", label: "DiscordUser Profile" },
+    { icon: InstagramIcon, href: "https://instagram.com/solarstoledchristmas", label: "Instagram" },
     { icon: XTwitIcon, href: "https://x.com/Vasityyy4n", label: "Twiter (X)" }
   ],
   imageActions: []
