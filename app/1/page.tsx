@@ -75,18 +75,26 @@ export default function BioPage({ config = {} }: BioPageProps) {
     }
   }, [])
 
+  const handleEnter = () => {
+    setIsEntered(true)
+    if (audioRef.current) {
+      audioRef.current.play().catch(error => console.error("Audio playback failed:", error))
+    }
+  }
+
   if (!isEntered) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center cursor-pointer"
-           onClick={() => setIsEntered(true)}>
+           onClick={handleEnter}>
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="text-white text-2xl font-bold hover:text-purple-400 transition-colors"
         >
-          Click to Enter
+          You Should Click :3
         </motion.div>
+        <audio ref={audioRef} src={finalConfig.backgroundMusic} loop />
       </div>
     )
   }
@@ -106,7 +114,6 @@ export default function BioPage({ config = {} }: BioPageProps) {
         
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
         
-        <audio ref={audioRef} src={finalConfig.backgroundMusic} loop />
         <AudioControl audioRef={audioRef} />
 
         <AnimatePresence>

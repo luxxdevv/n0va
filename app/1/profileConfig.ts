@@ -25,8 +25,8 @@ export interface ProfileConfig {
 
 export const defaultProfile: ProfileConfig = {
   username: "Luxx",
-  uid: "8675309",
-  description: "developing something cool...",
+  uid: "1",
+  description: "developing something cool... :3",
   profilePicture: "profile-picture.png",
   backgroundVideo: "background.mp4",
   backgroundMusic: "background-music.mp3",
