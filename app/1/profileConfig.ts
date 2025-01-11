@@ -27,6 +27,7 @@ export const defaultProfile: ProfileConfig = {
   username: "Luxx",
   uid: "1",
   description: "developing something cool... :3",
+  description1: "Owner @ n0va.one",
   profilePicture: "profile-picture.png",
   backgroundVideo: "background.mp4",
   backgroundMusic: "background-music.mp3",

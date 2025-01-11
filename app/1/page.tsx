@@ -232,6 +232,7 @@ export default function BioPage({ config = {} }: BioPageProps) {
                 </Tooltip>
                 <div className="mt-2 text-sm">
                   <TypewriterText text={finalConfig.description} />
+                  <TypewriterText text={finalConfig.description1} />
                 </div>
               </motion.div>
 
