@@ -30,7 +30,7 @@ export const defaultProfile: ProfileConfig = {
   description1: "taken by luxx 🫶, U14 Brampton SC",
   profilePicture: "./profile-picture.jpg",
   backgroundVideo: "./0103.mp4",
-  backgroundMusic: "./background-music.mp3",
+  backgroundMusic: "./background-music1.mp3",
   badges: [
     { icon: Crown, label: "Mine <3" },
     { icon: Video, label: "Content Creator" },
