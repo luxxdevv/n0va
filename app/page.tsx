@@ -96,10 +96,10 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { icon: Users, count: "10,700+", label: "Profile Views" },
-              { icon: UserPlus, count: "310,000+", label: "Users" },
-              { icon: Upload, count: "240,000+", label: "File Uploads" },
-              { icon: Users, count: "10,700+", label: "Subscribers" }
+              { icon: Users, count: "100+", label: "Profile Views" },
+              { icon: UserPlus, count: "2", label: "Users" },
+              { icon: Upload, count: "50", label: "File Uploads" },
+              { icon: Users, count: "1", label: "Subscribers" }
             ].map((stat, index) => (
               <motion.div
                 key={index}
