@@ -1,275 +1,74 @@
-'use client'
+"use client"
 
-import { motion, AnimatePresence } from "framer-motion"
-import { Eye } from 'lucide-react'
-import Image from "next/image"
-import Link from "next/link"
-import { useState, useEffect, useRef } from "react"
-import { AudioControl } from "@/components/bio/AudioControl"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { ProfileConfig, defaultProfile } from "./profileConfig"
+import { motion } from "framer-motion"
 
-const TypewriterText = ({ text }: { text: string }) => {
-  const [displayText, setDisplayText] = useState('')
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText(prev => prev + text[currentIndex])
-        setCurrentIndex(prev => prev + 1)
-      }, 100)
-      return () => clearTimeout(timeout)
-    }
-  }, [currentIndex, text])
-
+export default function BannedUserPage() {
   return (
-    <span className="text-white [text-shadow:_0_0_10px_rgb(255_255_255_/_0.4)]">
-      {displayText}
-    </span>
-  )
-}
-
-interface BioPageProps {
-  config?: Partial<ProfileConfig>
-}
-
-export default function BioPage({ config = {} }: BioPageProps) {
-  const [viewCount, setViewCount] = useState(49)
-  const [isEntered, setIsEntered] = useState(false)
-  const [isAudioReady, setIsAudioReady] = useState(false)
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-
-  // Merge provided config with default config
-  const finalConfig = {
-    ...defaultProfile,
-    ...config
-  }
-
-  // Initialize audio
-  useEffect(() => {
-    const audio = new Audio(finalConfig.backgroundMusic)
-    audio.loop = true
-    audio.preload = 'auto'
-    audio.volume = 0.5
-
-    audio.addEventListener('canplaythrough', () => {
-      setIsAudioReady(true)
-    })
-
-    audio.addEventListener('error', (e) => {
-      console.error('Audio loading error:', e)
-    })
-
-    audioRef.current = audio
-
-    return () => {
-      audio.pause()
-      audio.src = ''
-    }
-  }, [finalConfig.backgroundMusic])
-
-  const handleEnter = async () => {
-    try {
-      if (audioRef.current) {
-        // Create a new promise for playing audio
-        const playPromise = audioRef.current.play()
-        
-        if (playPromise !== undefined) {
-          await playPromise
-          console.log('Audio started playing successfully')
-        }
-      }
-    } catch (error) {
-      console.error('Error playing audio:', error)
-    }
-    setIsEntered(true)
-  }
-
-  // Entry screen
-  if (!isEntered) {
-    return (
-      <div 
-        className="min-h-screen bg-black flex items-center justify-center cursor-pointer"
-        onClick={handleEnter}
+    <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-4">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="relative max-w-[400px] w-full"
       >
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-white text-2xl font-bold hover:text-yellow-400 transition-colors"
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.2 }}
+          className="bg-[#111111] border border-[#222222] rounded-lg p-6 text-center group hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(147,51,234,0.15)]"
         >
-          Click To Enter.
-        </motion.div>
-      </div>
-    )
-  }
-
-  const usernameAnimation = {
-    animate: {
-      y: [0, -10, 0],
-      rotateY: [0, 360],
-      transition: {
-        y: {
-          duration: 1,
-          repeat: Infinity,
-          repeatDelay: 5
-        },
-        rotateY: {
-          duration: 1,
-          repeat: Infinity,
-          repeatDelay: 7
-        }
-      }
-    }
-  }
-
-
-  return (
-    <TooltipProvider>
-      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4 relative">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src={finalConfig.backgroundVideo} type="video/mp4" />
-        </video>
-        
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-        
-        <AudioControl audioRef={audioRef} />
-
-        <AnimatePresence>
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-md relative z-10"
+            animate={{ y: [0, -6, 0] }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+            className="text-white text-5xl font-bold mb-4"
           >
-            <div className="bg-zinc-900/50 rounded-3xl p-8 backdrop-blur-sm border border-zinc-800">
-              {/* View Counter */}
-              <div className="flex items-center gap-2 text-zinc-400 mb-8">
-                <Eye className="w-4 h-4" />
-                <span className="text-sm">{viewCount}</span>
-              </div>
-
-              {/* Avatar */}
-              <div className="flex justify-center mb-6">
-                <motion.div
-                  initial={{ scale: 0.5 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="relative group"
-                >
-                  <div className="absolute -inset-0.5 bg-yellow-500/30 rounded-full blur-lg animate-pulse"></div>
-                  <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-zinc-700">
-                    <Image
-                      src={finalConfig.profilePicture}
-                      alt="Profile"
-                      width={128}
-                      height={128}
-                      className="object-cover"
-                    />
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Badges */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex flex-wrap justify-center gap-4 mb-6"
-              >
-                {finalConfig.badges.map((badge, index) => (
-                  <Tooltip key={index} delayDuration={0}>
-                    <TooltipTrigger>
-                      <div 
-                        className="w-8 h-8 bg-zinc-800 rounded-lg flex items-center justify-center
-                                  border border-zinc-700 hover:border-yellow-500 transition-colors
-                                  hover:bg-zinc-800/50 group"
-                      >
-                        <badge.icon className="w-4 h-4 text-zinc-400 group-hover:text-yellow-400" />
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent className="bg-zinc-800/50 border border-zinc-700">
-                      <p>{badge.label}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </motion.div>
-
-              {/* Username */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                className="text-center mb-4"
-              >
-                <Tooltip delayDuration={0}>
-                  <TooltipTrigger>
-                    <motion.h1 
-                      className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-700 bg-clip-text text-transparent
-                                hover:text-yellow-900 transition-colors cursor-pointer
-                                [text-shadow:_0_0_15px_rgb(251_246_217_/_0.4)]"
-                      variants={usernameAnimation}
-                      animate="animate"
-                    >
-                      {finalConfig.username}
-                    </motion.h1>
-                  </TooltipTrigger>
-                  <TooltipContent className="bg-zinc-800/50 border border-zinc-700">
-                    <p>UID: {finalConfig.uid}</p>
-                  </TooltipContent>
-                </Tooltip>
-                <div className="mt-2 text-sm">
-                  <TypewriterText text={finalConfig.description} />
-                </div>
-                <div className="mt-2 text-sm">
-                <TypewriterText text={finalConfig.description1} />
-                </div>
-              </motion.div>
-
-              {/* Social Links */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-                className="bg-zinc-800/50 rounded-xl p-4 flex justify-center gap-4"
-              >
-                {finalConfig.socials.map((social, index) => (
-                  <Tooltip key={index} delayDuration={0}>
-                    <TooltipTrigger asChild>
-                      <Link 
-                        href={social.href}
-                        target="_blank"
-                        className="w-10 h-10 bg-zinc-700/50 rounded-lg flex items-center justify-center
-                                  hover:bg-yellow-500/20 transition-all duration-300 group
-                                  hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] hover:border-white
-                                  border border-transparent text-zinc-400 hover:text-white"
-                      >
-                        <social.icon />
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent className="bg-zinc-800/50 border border-zinc-700">
-                      <p>{social.label}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </motion.div>
-            </div>
+            !
           </motion.div>
-        </AnimatePresence>
-      </div>
-    </TooltipProvider>
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-xl font-medium mb-2 text-white"
+          >
+            This User has been Banned From n0va.one
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="text-gray-500 text-sm mb-6"
+          >
+            This link is now available, please go to the discord to apply and get this extension
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="flex gap-3 justify-center"
+          >
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="https://n0va.one"
+              className="px-4 py-1.5 bg-[#111111] border border-[#222222] rounded-full text-sm text-gray-300 hover:border-purple-500/50 hover:text-white hover:shadow-[0_0_10px_rgba(147,51,234,0.15)] transition-all duration-300"
+            >
+              Home
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="https://dsc.gg/n0vabios"
+              className="px-4 py-1.5 bg-[#111111] border border-[#222222] rounded-full text-sm text-gray-300 hover:border-purple-500/50 hover:text-white hover:shadow-[0_0_10px_rgba(147,51,234,0.15)] transition-all duration-300"
+            >
+              Discord
+            </motion.a>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </div>
   )
 }
 
