@@ -103,7 +103,7 @@ export function PricingSection() {
                 <Button 
                   className="w-full mt-6 bg-purple-500 hover:bg-purple-600"
                   onClick={() => {
-                    window.location.href = 'https://sellix.io/product/your-product-id'
+                    window.location.href = 'https://n0vabios.mysellix.io/product/n0va-one-premium'
                   }}
                 >
                   Purchase Now
