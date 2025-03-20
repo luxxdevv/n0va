@@ -16,13 +16,21 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  
+  // Completely disable static generation for the entire app
+  // This is a drastic measure but will fix the issue
+  output: 'server',
+  
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
+    // Disable static generation
+    disableStaticGeneration: true,
   },
   
-  // Add these configurations to prevent static generation for auth pages
+  // These are no longer needed with output: 'server'
+  // but keeping them for reference
   async rewrites() {
     return [
       {
@@ -38,7 +46,6 @@ const nextConfig = {
     ]
   },
   
-  // Add this to exclude specific pages from static generation
   unstable_excludeFiles: [
     '**/app/forgot-password/**',
     '**/app/login/**',
