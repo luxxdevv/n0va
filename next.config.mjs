@@ -46,3 +46,26 @@ function mergeConfig(nextConfig, userConfig) {
 }
 
 export default nextConfig
+experimental: {
+  // This tells Next.js not to statically generate these pages
+  excludeDefaultMomentLocales: true,
+},
+
+// Add this to make specific routes dynamic
+async rewrites() {
+  return [
+    {
+      source: "/forgot-password",
+      destination: "/forgot-password",
+      has: [
+        {
+          type: "header",
+          key: "x-make-dynamic",
+        },
+      ],
+    },
+  ]
+},
+}
+
+module.exports = nextConfig
