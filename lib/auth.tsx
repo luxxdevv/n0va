@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState, type ReactNode } from "react"
 import { supabase } from "@/lib/supabase"
 
 // Create a properly typed context
@@ -11,12 +11,17 @@ type AuthContextType = {
   resetPassword: (email: string) => Promise<{ error: any | null }>
 }
 
+// Create the context with a default value
 const AuthContext = createContext<AuthContextType | null>(null)
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+type AuthProviderProps = {
+  children: ReactNode
+}
 
-  const login = (userData) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [user, setUser] = useState<any | null>(null)
+
+  const login = (userData: any) => {
     setUser(userData)
   }
 
@@ -27,7 +32,7 @@ export const AuthProvider = ({ children }) => {
   const resetPassword = async (email: string) => {
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
+        redirectTo: typeof window !== "undefined" ? `${window.location.origin}/reset-password` : undefined,
       })
       return { error }
     } catch (error) {
@@ -35,7 +40,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const value = {
+  const value: AuthContextType = {
     user,
     login,
     logout,
@@ -45,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-export const useAuth = () => {
+export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext)
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider")
