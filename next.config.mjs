@@ -17,41 +17,39 @@ const nextConfig = {
     unoptimized: true,
   },
   
-  // Completely disable static generation for the entire app
-  // This is a drastic measure but will fix the issue
-  output: 'server',
-  
   experimental: {
     webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
     parallelServerCompiles: true,
-    // Disable static generation
-    disableStaticGeneration: true,
+    parallelServerBuildTraces: true,
   },
   
-  // These are no longer needed with output: 'server'
-  // but keeping them for reference
+  // Disable etag generation to prevent caching
+  generateEtags: false,
+  
+  // Use the correct rewrites configuration
   async rewrites() {
     return [
       {
         source: '/forgot-password',
         destination: '/forgot-password',
-        has: [
+      },
+    ]
+  },
+  
+  // Use headers to force dynamic rendering
+  async headers() {
+    return [
+      {
+        source: '/forgot-password',
+        headers: [
           {
-            type: 'header',
-            key: 'x-make-dynamic',
+            key: 'Cache-Control',
+            value: 'no-store, max-age=0',
           },
         ],
       },
     ]
   },
-  
-  unstable_excludeFiles: [
-    '**/app/forgot-password/**',
-    '**/app/login/**',
-    '**/app/register/**',
-    '**/app/reset-password/**',
-  ],
 }
 
 mergeConfig(nextConfig, userConfig)
