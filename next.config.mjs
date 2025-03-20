@@ -21,6 +21,30 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  
+  // Add these configurations to prevent static generation for auth pages
+  async rewrites() {
+    return [
+      {
+        source: '/forgot-password',
+        destination: '/forgot-password',
+        has: [
+          {
+            type: 'header',
+            key: 'x-make-dynamic',
+          },
+        ],
+      },
+    ]
+  },
+  
+  // Add this to exclude specific pages from static generation
+  unstable_excludeFiles: [
+    '**/app/forgot-password/**',
+    '**/app/login/**',
+    '**/app/register/**',
+    '**/app/reset-password/**',
+  ],
 }
 
 mergeConfig(nextConfig, userConfig)
@@ -46,26 +70,4 @@ function mergeConfig(nextConfig, userConfig) {
 }
 
 export default nextConfig
-experimental: {
-  // This tells Next.js not to statically generate these pages
-  excludeDefaultMomentLocales: true,
-},
 
-// Add this to make specific routes dynamic
-async rewrites() {
-  return [
-    {
-      source: "/forgot-password",
-      destination: "/forgot-password",
-      has: [
-        {
-          type: "header",
-          key: "x-make-dynamic",
-        },
-      ],
-    },
-  ]
-},
-}
-
-module.exports = nextConfig
